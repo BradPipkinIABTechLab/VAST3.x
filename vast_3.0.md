@@ -8,8 +8,7 @@ Published July 19, 2012
 
 This document has been developed by the IAB Digital Video Committee
 
-The Video Ad Serving Template (VAST) specification was updated to version 3.0 by a working group of
-volunteers from 42 IAB member companies.
+The Video Ad Serving Template (VAST) specification was updated to version 3.0 by a working group of volunteers from 42 IAB member companies.
 
 The VAST Working Group was led by:
 
@@ -17,104 +16,65 @@ The VAST Working Group was led by:
 - Payam Shodjai, Google/YouTube
 
 The following IAB member companies contributed to this document:
-
-24/7 Real Media FreeWheel Ooyala
-Adap.tv Google & YouTube PointRoll
-Adobe Systems HealthiNation SeaChange International
-AppNexus ImServices Group Ltd. SpotXchange
-Auditude Innovid, Inc. TargetSpot
-BlackArrow Kantar Video Tremor Video
-Brightcove LiveRail, Inc. TRUSTe
-Brightroll MediaMind TubeMogul
-Cable Television Microsoft Turner Broadcasting System
-Laboratories, Inc. Mixpo Unicast
-CBS Interactive NBC Universal Digital Media Vindico
-Comcast Interactive Media New York Times Weather.com
-Digital Broadcasting Group Nielsen Yahoo!
-Evidon OneScreen YuMe
+||||
+|---|---|---|
+| 24/7 Real Media | FreeWheel | Ooyala |
+| Adap.tv | Google & YouTube | PointRoll |
+| Adobe Systems | HealthiNation | SeaChange International |
+| AppNexus | ImServices Group Ltd. | SpotXchange |
+| Auditude | Innovid, Inc. | TargetSpot |
+| BlackArrow | Kantar Video | Tremor Video |
+| Brightcove | LiveRail, Inc. | TRUSTe |
+| Brightroll | MediaMind | TubeMogul |
+| Cable Television | Microsoft | Turner Broadcasting System |
+| Laboratories, Inc. | Mixpo | Unicast |
+| CBS Interactive | NBC Universal | Digital Media Vindico |
+| Comcast Interactive Media | New York Times | Weather.com |
+| Digital Broadcasting Group | Nielsen | Yahoo! |
+| Evidon | OneScreen | YuMe |
 
 The IAB leads on this initiative were Chris Mejia and Katie Stroud
 
-Contact adtechnology@iab.net to comment on this document. Please be sure to include the version
-number of this document (found on the bottom right corner on this page).
+Contact adtechnology@iab.net to comment on this document. Please be sure to include the version number of this document (found on the bottom right corner on this page).
 
 ABOUT THE IAB'S DIGITAL VIDEO COMMITTEE
-The Digital Video Committee of the IAB is comprised of over 180 member companies actively engaged in
-the creation and execution of digital video advertising. One of the goals of the committee is to
-implement a comprehensive set of guidelines, measurement, and creative options for interactive video
-advertising. The Committee works to educate marketers and agencies on the strength of digital video as
-a marketing vehicle. A full list of Committee member companies can be found at:
-www.iab.net/digital_video_committee
+The Digital Video Committee of the IAB is comprised of over 180 member companies actively engaged in the creation and execution of digital video advertising. One of the goals of the committee is to implement a comprehensive set of guidelines, measurement, and creative options for interactive video advertising. The Committee works to educate marketers and agencies on the strength of digital video as a marketing vehicle. A full list of Committee member companies can be found at: www.iab.net/digital_video_committee
 
 This document is on the IAB website at: http://www.iab.net/vsuite/vast
 
+<!-- If we match TOC from .pdf it goes here -->
+
 ## Executive Summary
-The IAB's Video Ad Serving Template (VAST) specification is a universal XML schema for serving ads to
-digital video players, and describes expected video player behavior when executing VAST-formatted ad
-responses. VAST 3.0 adds critical functionality that opens up the in-stream digital video advertising
-marketplace, reducing expensive technical barriers and encouraging advertisers to increase video ad
-spend.
+The IAB's Video Ad Serving Template (VAST) specification is a universal XML schema for serving ads to digital video players, and describes expected video player behavior when executing VAST-formatted ad responses. VAST 3.0 adds critical functionality that opens up the in-stream digital video advertising marketplace, reducing expensive technical barriers and encouraging advertisers to increase video ad spend.
 
-As online video content publishing has become more common, video publishers have sought to
-monetize their content with in-stream video advertising. Before VAST, there was not a common in-stream advertising protocol for video players, which made scalable distribution of ads impossible for ad
-servers. In order to serve ads to multiple publishers using disparate proprietary video players, ad-serving
-organizations had to develop slightly different ad responses for every publisher/video player targeted.
-This approach was expensive and didn't easily scale.
+As online video content publishing has become more common, video publishers have sought to monetize their content with in-stream video advertising. Before VAST, there was not a common in-stream advertising protocol for video players, which made scalable distribution of ads impossible for ad servers. In order to serve ads to multiple publishers using disparate proprietary video players, ad-serving organizations had to develop slightly different ad responses for every publisher/video player targeted. This approach was expensive and didn't easily scale.
 
-VAST provides a common protocol that enables ad servers to use a single ad response format across
-multiple publishers/video players. In 2008, the IAB introduced the first version of VAST to the video
-advertising marketplace, which has since been widely adopted throughout the industry. In 2009 features
-were added that enabled additional functionality and more clarity. Today, as the in-stream digital video
-advertising market becomes more sophisticated, additional features and functionality are required to
-improve support for in-stream ad display and reporting.
+VAST provides a common protocol that enables ad servers to use a single ad response format across multiple publishers/video players. In 2008, the IAB introduced the first version of VAST to the video advertising marketplace, which has since been widely adopted throughout the industry. In 2009 features were added that enabled additional functionality and more clarity. Today, as the in-stream digital video advertising market becomes more sophisticated, additional features and functionality are required to improve support for in-stream ad display and reporting.
 
-VAST 3.0 provides more features, increased functionality and better reporting, while maintaining
-backward compatibility with VAST 2.0 to ensure a smooth transition for the industry. VAST 3.0 provides
-additional detail for the ad response format and the expected behavior of video players.
+VAST 3.0 provides more features, increased functionality and better reporting, while maintaining backward compatibility with VAST 2.0 to ensure a smooth transition for the industry. VAST 3.0 provides additional detail for the ad response format and the expected behavior of video players.
 
-With VAST 3.0, video players now have the ability to declare which ad formats they support. Five
-formats are provided as options: Linear Ads, NonLinear Ads, Skippable Linear Ads, Linear Ads with
-Companions, and Ad Pods (a sequenced group of ads). Skippable Linear Ads and Ad Pods are new
-formats offered with this release. Some video players choose to only support certain VAST ad formats in
-accordance with their publishing business model. With VAST 3.0, the guesswork of which VAST ad
-format a player supports is eliminated.
+With VAST 3.0, video players now have the ability to declare which ad formats they support. Five formats are provided as options: Linear Ads, NonLinear Ads, Skippable Linear Ads, Linear Ads with Companions, and Ad Pods (a sequenced group of ads). Skippable Linear Ads and Ad Pods are new formats offered with this release. Some video players choose to only support certain VAST ad formats in accordance with their publishing business model. With VAST 3.0, the guesswork of which VAST ad format a player supports is eliminated.
 
-Video content publishers should upgrade their video players to support VAST 3.0 ad responses according
-to the ad formats they support. These video players should also adhere to the expected behaviors
-defined in this document. Additionally, ad-serving organizations should ensure that their VAST 3.0 ad
-responses are well formatted and adhere to the specifications outlined in this document.
+Video content publishers should upgrade their video players to support VAST 3.0 ad responses according to the ad formats they support. These video players should also adhere to the expected behaviors defined in this document. Additionally, ad-serving organizations should ensure that their VAST 3.0 ad responses are well formatted and adhere to the specifications outlined in this document.
 
-As with all IAB guidelines and specifications, this document will be updated as in-stream video
-advertising progresses and new ad formats become more widely adopted.
+As with all IAB guidelines and specifications, this document will be updated as in-stream video advertising progresses and new ad formats become more widely adopted.
 
 ## Intended Audience
-Anyone involved in the in-stream (also referred to as "in-player") video ad supply chain can benefit from
-being familiar with these guidelines, but implementation details are targeted toward video player
-developers and video ad-serving organizations. Specifically, video software engineers and video product
-managers should use this document as a guide when implementing technology designed to support a
-VAST ad response.
+Anyone involved in the in-stream (also referred to as "in-player") video ad supply chain can benefit from being familiar with these guidelines, but implementation details are targeted toward video player developers and video ad-serving organizations. Specifically, video software engineers and video product managers should use this document as a guide when implementing technology designed to support a VAST ad response.
 
 ## IAB Video Guidelines
-The incredible growth of online video has been accompanied by a steep rise in video advertising spend.
-To facilitate this spend, the IAB Digital Video Committee has brought together publishers, agencies and
-vendors to create a set of video advertising specifications that establish a common framework for
-communication between ad servers and video players. Six sets of IAB guidelines have been developed to
-help improve video advertising:
+The incredible growth of online video has been accompanied by a steep rise in video advertising spend. To facilitate this spend, the IAB Digital Video Committee has brought together publishers, agencies and vendors to create a set of video advertising specifications that establish a common framework for communication between ad servers and video players. Six sets of IAB guidelines have been developed to help improve video advertising:
 
 - Video Ad Measurement Guidelines (VAMG): Outlines how events should be tracked.
-- Video Ad Serving Template (VAST): Enables the common structure of a video ad response sent
-from an ad server to a video player.
-- Video Player Ad Interface Definition (VPAID): Establishes the communication protocol
-between an interactive ad and the video player that is rendering it.
-- Video Multi Ads Playlist (VMAP): Enable a structure for a playlist of video ads sent from an ad
-server to a video player.
-- Digital Video Ad Format Guidelines and Best Practices: Outlines the general format and
-best practices that video ads should adhere to for the best advertising experience.
-- Digital Video In-Stream Ad Metrics Definitions: Defines industry-accepted metrics for
-measuring video ad effectiveness.
+- Video Ad Serving Template (VAST): Enables the common structure of a video ad response sent from an ad server to a video player.
+- Video Player Ad Interface Definition (VPAID): Establishes the communication protocol between an interactive ad and the video player that is rendering it.
+- Video Multi Ads Playlist (VMAP): Enable a structure for a playlist of video ads sent from an ad server to a video player.
+- Digital Video Ad Format Guidelines and Best Practices: Outlines the general format and best practices that video ads should adhere to for the best advertising experience.
+- Digital Video In-Stream Ad Metrics Definitions: Defines industry-accepted metrics for measuring video ad effectiveness.
 
-The following diagram explains the relationship between these guidelines and the video ad serving
-process.
+The following diagram explains the relationship between these guidelines and the video ad serving process.
+
+![Figure/context from original PDF page 7](assets/page_07_figure_context.png)
 
 ## Updates in VAST 3.0
 VAST has been widely adopted in the industry, but certain limitations foster messy work-arounds to
@@ -122,65 +82,35 @@ meet the needs of the industry. Updates in VAST 3.0 were designed to provide sup
 practices in video advertising, along with variable compliance formats that companies can choose to
 support while remaining compliant with VAST 3.0 guidelines.
 
-
-![Figure/context from original PDF page 7](assets/vast_3_0/page_07_figure_context.png)
-
-- NonLinear Wrapper Change: NonLinear resource files are not needed in a Wrapper VAST
-response. VAST 3.0 clarifies the difference between an InLine NonLinear creative and a Wrapper
-NonLinear creative. Only tracking elements are relevant for a Wrapper NonLinear.
-- Compliance Formats: VAST supports five different ad formats. Publishers don't need to support all
-five models to be compliant with VAST 3.0. In VAST 3.0 video content publishers can declare support
-for one or more VAST ad formats while maintaining minimal guidelines for compliance.
-- Support for Ad Pods: Using a sequence attribute on the &lt;Ad&gt; element, you can format a VAST
-response that groups multiple ads into a sequential pod of ads.
-- Support for Skippable Linear Ads: An optional ad-serving model for ads that viewers can skip
-enables publishers to support a business model in which publishers and advertisers can negotiate
-billing based on ads that play all the way through.
-- Support for in-ads privacy notice: When multiple ad servers are involved in video advertising,
-displaying an in-ads privacy notice to support Online Behavioral Advertising (OBA) Self-Regulation can
-be difficult. VAST 3.0 shares best practice guidelines for handling in-ads privacy notices.
-- Better error reporting: An improved list of error codes enables video players to report more
-specific details when ads don't serve properly. The resulting troubleshooting data can help improve
+- NonLinear Wrapper Change: NonLinear resource files are not needed in a Wrapper VAST response. VAST 3.0 clarifies the difference between an InLine NonLinear creative and a Wrapper NonLinear creative. Only tracking elements are relevant for a Wrapper NonLinear.
+- Compliance Formats: VAST supports five different ad formats. Publishers don't need to support all five models to be compliant with VAST 3.0. In VAST 3.0 video content publishers can declare support for one or more VAST ad formats while maintaining minimal guidelines for compliance.
+- Support for Ad Pods: Using a sequence attribute on the &lt;Ad&gt; element, you can format a VAST response that groups multiple ads into a sequential pod of ads.
+- Support for Skippable Linear Ads: An optional ad-serving model for ads that viewers can skip enables publishers to support a business model in which publishers and advertisers can negotiate billing based on ads that play all the way through.
+- Support for in-ads privacy notice: When multiple ad servers are involved in video advertising, displaying an in-ads privacy notice to support Online Behavioral Advertising (OBA) Self-Regulation can be difficult. VAST 3.0 shares best practice guidelines for handling in-ads privacy notices.
+- Better error reporting: An improved list of error codes enables video players to report more specific details when ads don't serve properly. The resulting troubleshooting data can help improve
 video advertising technology over time.
-- More tracking events: Some tracking events and attributes have been added to provide more
-details about served ads and to support new ad formats such as Skippable Ads.
+- More tracking events: Some tracking events and attributes have been added to provide more details about served ads and to support new ad formats such as Skippable Ads.
 
 VAST 3.0 is designed to be able to receive and play responses formatted as VAST 2.0 and higher. This
 means that:
 
-- New VAST 3.0 players will continue to render VAST 2.0 ads and also support full backwards
-compatibility (to the extent possible) of future VAST versions.
-- Video players that understand VAST 2.0 can display VAST 3.0 ads, if they relax their schema and
-version checks and do not fail on unknown attributes or elements.
-- VAST 2.0 Wrappers can point to VAST 3.0 responses and VAST 3.0 Wrappers can point to VAST 2.0
-responses.
+- New VAST 3.0 players will continue to render VAST 2.0 ads and also support full backwards compatibility (to the extent possible) of future VAST versions.
+- Video players that understand VAST 2.0 can display VAST 3.0 ads, if they relax their schema and version checks and do not fail on unknown attributes or elements.
+- VAST 2.0 Wrappers can point to VAST 3.0 responses and VAST 3.0 Wrappers can point to VAST 2.0 responses.
 - VAST 1.0 is deprecated, meaning that the IAB no longer supports it.
 
-In addition, to VAST 3.0 updates, this document has been overhauled with expanded explanations of
-schema features and expectations. Implementation notes specific to ad server or video player
-implementation have been added to help call out important details about technology and expectations.
+In addition, to VAST 3.0 updates, this document has been overhauled with expanded explanations of schema features and expectations. Implementation notes specific to ad server or video player implementation have been added to help call out important details about technology and expectations.
 
 ## 1 General Overview
-In online advertising where browsers are used to display ads, tracking ad interactions is made possible
-using HTML to send data across the many networks and servers that may be involved. However, in video
-advertising, a video player is not a browser and may not use HTML. Video players are built on a variety
-of different technologies, each using their own instance of the technology.
+In online advertising where browsers are used to display ads, tracking ad interactions is made possible using HTML to send data across the many networks and servers that may be involved. However, in video advertising, a video player is not a browser and may not use HTML. Video players are built on a variety of different technologies, each using their own instance of the technology.
 
-If ad servers want to serve ads to video players, they have to develop ad tags designed to display ads
-based on the technology of each video player they want to serve to. Complicating matters is that
-multiple servers may be required as part of the process to serve ads, requiring each to provide
-specialized ad display information.
+If ad servers want to serve ads to video players, they have to develop ad tags designed to display ads based on the technology of each video player they want to serve to. Complicating matters is that multiple servers may be required as part of the process to serve ads, requiring each to provide specialized ad display information.
 
-VAST is a video ad-serving template that provides a uniform way for advertising data to be transferred
-from ad servers to video players independent of any technology. Using XML, VAST does for video ad
-serving what HTML does for browser-based ad serving.
+VAST is a video ad-serving template that provides a uniform way for advertising data to be transferred from ad servers to video players independent of any technology. Using XML, VAST does for video ad serving what HTML does for browser-based ad serving.
 
-Just as HTML enables web browsers to display websites from any web server, VAST enables video
-players to display ads from any video ad server.
+Just as HTML enables web browsers to display websites from any web server, VAST enables video players to display ads from any video ad server.
 
-VAST supports video ad serving to any video player that can request and parse an XML document.
-Nothing about VAST is device- or platform-specific, meaning that it works in many video player
-situations including some of the following:
+VAST supports video ad serving to any video player that can request and parse an XML document. Nothing about VAST is device- or platform-specific, meaning that it works in many video player situations including some of the following:
 
 - Video players in web pages
 - Video players in mobile-optimized web pages
@@ -189,39 +119,27 @@ situations including some of the following:
 - Video playback through IPTV or other set-top-box environments
 
 ### 1.1 How VAST Works
-Although VAST was initially designed to facilitate a standard ad response in video advertising, it has
-come to encompass a set of expectations for how the video player should handle the response. The
-latest version of VAST formalizes these expectations by providing guidelines on how VAST ads should be
-displayed and tracked by the video player.
+Although VAST was initially designed to facilitate a standard ad response in video advertising, it has come to encompass a set of expectations for how the video player should handle the response. The latest version of VAST formalizes these expectations by providing guidelines on how VAST ads should be displayed and tracked by the video player.
 
-In general, the ad-serving process supported by VAST involves the video player requesting a video ad,
-displaying the VAST response and sending tracking information for ad impressions and other events
-back to the server. This can be done directly between the video player and one ad server (usually the
-publisher's) or between the video player and multiple ad servers.
+In general, the ad-serving process supported by VAST involves the video player requesting a video ad, displaying the VAST response and sending tracking information for ad impressions and other events back to the server. This can be done directly between the video player and one ad server (usually the publisher's) or between the video player and multiple ad servers.
 
-When ads are served directly from a publisher's system to the video player, the VAST ad-serving process
-is as follows:
+When ads are served directly from a publisher's system to the video player, the VAST ad-serving process is as follows:
+
+![Figure/context from original PDF page 9](assets/page_09_figure_context.png)
 
 1. VAST Request: The video player makes a call to the ad server for a VAST response.
-2. VAST Inline Response: The ad server responds with a VAST Inline response that contains all the
-media files and tracking URIs required to display and track the ad.
-3. Tracking URIs Pinged: The video player requests tracking resources from the tracking URIs
-provided when associated events occur in the ad.
+2. VAST Inline Response: The ad server responds with a VAST Inline response that contains all the media files and tracking URIs required to display and track the ad.
+3. Tracking URIs Pinged: The video player requests tracking resources from the tracking URIs provided when associated events occur in the ad.
 
-
-![Figure/context from original PDF page 9](assets/vast_3_0/page_09_figure_context.png)
-
-In the scenario just described, only one ad server is involved. This commonly happens if a VAST
-campaign is directly booked in a publisher's ad server. The benefits of VAST become more apparent
-when multiple ad servers become part of the video ad serving process.
+In the scenario just described, only one ad server is involved. This commonly happens if a VAST campaign is directly booked in a publisher's ad server. The benefits of VAST become more apparent when multiple ad servers become part of the video ad serving process.
 
 The diagram below illustrates the process for serving ads when a secondary ad server is involved:
 
-1. VAST Request: The video player sends a request to the primary ad server.
-2. VAST Redirect: During campaign set up, the advertising party (possibly an agency or network)
-sends a VAST Wrapper response identifying resources from a secondary ad server. The following
-example provides an excerpt of a VAST Wrapper response:
+![Figure/context from original PDF page 10](assets/vast_3_0/page_10_figure_context.png)
 
+
+1. VAST Request: The video player sends a request to the primary ad server.
+2. VAST Redirect: During campaign set up, the advertising party (possibly an agency or network) sends a VAST Wrapper response identifying resources from a secondary ad server. The following example provides an excerpt of a VAST Wrapper response:
 ```xml
 <VAST> <Ad> <Wrapper> …
 <VASTAdTagURI>
@@ -229,178 +147,98 @@ http://SecondaryAdServer.vast.tag
 </VASTAdTagURI>
 …</Wrapper> </Ad> </VAST>
 ```
-
-3. VAST Request: After parsing the VAST response, the video player sends a request to the secondary
-ad server using the URI provided in the primary VAST response from step 2.
-4. VAST Inline Response: The secondary ad server sends a VAST response containing all the
-necessary details for the ad to be displayed. The example below shows the outlining VAST elements
-used for the inline response:
-
+3. VAST Request: After parsing the VAST response, the video player sends a request to the secondary ad server using the URI provided in the primary VAST response from step 2.
+4. VAST Inline Response: The secondary ad server sends a VAST response containing all the necessary details for the ad to be displayed. The example below shows the outlining VAST elements used for the inline response:
 ```xml
 <VAST> <Ad> <InLine>
 …
 </InLine> </Ad> </VAST>
 ```
+5. Tracking URIs Pinged: Upon triggering specified events for the ad, each of the ad servers are notified using the tracking URIs provided.
 
-5. Tracking URIs Pinged: Upon triggering specified events for the ad, each of the ad servers are
-notified using the tracking URIs provided.
+In the scenario above, two ad servers are involved. This scenario commonly occurs when one or more vendor ad servers become part of the process and where both parties want to receive all the tracking information.
 
-In the scenario above, two ad servers are involved. This scenario commonly occurs when one or more
-vendor ad servers become part of the process and where both parties want to receive all the tracking
-information.
-
-
-![Figure/context from original PDF page 10](assets/vast_3_0/page_10_figure_context.png)
-
-This ad-serving scenario can easily be extended beyond two ad servers. The secondary ad server may
-respond with a VAST Wrapper that points to yet another ad server. Eventually, however, the last ad
-server in the chain must respond with a VAST InLine response.
+This ad-serving scenario can easily be extended beyond two ad servers. The secondary ad server may respond with a VAST Wrapper that points to yet another ad server. Eventually, however, the last ad server in the chain must respond with a VAST InLine response.
 
 ### 1.2 Ad Types Supported by VAST
-In-stream video ads may be a video that plays before, after or in the middle of the publisher's content
-video (Linear), or the ad may be an image ad that overlays content video while the content video is in
-progress (NonLinear).
+In-stream video ads may be a video that plays before, after or in the middle of the publisher's content video (Linear), or the ad may be an image ad that overlays content video while the content video is in progress (NonLinear).
 
 Some Linear and NonLinear Ad types are described in further detail below:
 
-#### 1.2.1 Linear Ads
-Linear ads are typically served as video, but may also include static images, that play for a set duration at
-linear points along the timeline of the content video. They may play before the content video starts
-(pre-roll), at a break during the content video (mid-roll), or after the content video (post-roll).
+![Figure/context from original PDF page 11](assets/page_11_figure_context.png)
 
-With other technologies in place, such as VPAID, a Linear Ad's duration may be extended upon viewer
-interaction.
+#### 1.2.1 Linear Ads
+Linear ads are typically served as video, but may also include static images, that play for a set duration at linear points along the timeline of the content video. They may play before the content video starts (pre-roll), at a break during the content video (mid-roll), or after the content video (post-roll).
+
+With other technologies in place, such as VPAID, a Linear Ad's duration may be extended upon viewer interaction.
 
 #### 1.2.2 Companion Ads
-Companion ads are served with Linear or NonLinear ads, but are displayed outside the video player.
-They can serve as a leave-behind on the page after the video ad has ended and enable a more engaging
-experience for the user. A Companion Ad is commonly displayed as a standard banner or rich media ad,
-but can also be a skin that wraps the video ad experience. One or more Companion ads may be served
-with the originating video portion of the ad, or the Master Ad.
-
-
-![Figure/context from original PDF page 11](assets/vast_3_0/page_11_figure_context.png)
+Companion ads are served with Linear or NonLinear ads, but are displayed outside the video player. They can serve as a leave-behind on the page after the video ad has ended and enable a more engaging experience for the user. A Companion Ad is commonly displayed as a standard banner or rich media ad, but can also be a skin that wraps the video ad experience. One or more Companion ads may be served with the originating video portion of the ad, or the Master Ad.
 
 #### 1.2.3 Nonlinear Ads
-Usually an image ad (also called an Overlay), nonlinear ads are displayed on top of the content video
-concurrently with video playback. Nonlinear ads usually cover the top or bottom fifth of the content
-video and are typically text or static images that display for about 10-20 seconds.
+Usually an image ad (also called an Overlay), nonlinear ads are displayed on top of the content video concurrently with video playback. Nonlinear ads usually cover the top or bottom fifth of the content video and are typically text or static images that display for about 10-20 seconds.
 
-Using other technologies, such as VPAID, the Ad may be interactive and capable of stopping the content
-video to play additional ad content. Such interactions are only user-initiated.
+Using other technologies, such as VPAID, the Ad may be interactive and capable of stopping the content video to play additional ad content. Such interactions are only user-initiated.
 
 #### 1.2.4 Ad Pods
-New in VAST 3.0 is the support for Ad Pods, the delivery of a set of sequential Linear ads. The figure
-below represents an Ad Pod with three ads that play sequentially before the content video. Ad Pods can
-play before, during a break in, or after the content video plays and function like a TV commercial break
-with multiple ad spots. Placement of an ad pod is outside the scope of VAST 3.0 but may be positioned
-either by video player programming or by using VMAP to specify ad breaks. See section 3.1 for
-information about VMAP.
+New in VAST 3.0 is the support for Ad Pods, the delivery of a set of sequential Linear ads. The figure below represents an Ad Pod with three ads that play sequentially before the content video. Ad Pods can play before, during a break in, or after the content video plays and function like a TV commercial break with multiple ad spots. Placement of an ad pod is outside the scope of VAST 3.0 but may be positioned either by video player programming or by using VMAP to specify ad breaks. See section 3.1 for information about VMAP.
+
+![Figure/context from original PDF page 12](assets/page_12_figure_context.png)
 
 ### 1.3 What VAST is Not
-This document describes functional VAST schema format requirements and expectations for
-compliance. The following details are NOT covered in this document.
+This document describes functional VAST schema format requirements and expectations for compliance. The following details are NOT covered in this document.
 
-Creative Specifications
-This document provides technical details on using the XML schema that transfers data from one
-system to another. Video ad creative specs are not included as part of those technical details.
-Please see the IAB Digital Video Ad Format and Best Practices guidelines for information on
-creative specs.
+    <b>Creative Specifications</b>
+    This document provides technical details on using the XML schema that transfers data from one system to another. Video ad creative specs are not included as part of those technical details. Please see the IAB Digital Video Ad Format and Best Practices guidelines for information on creative specs.
 
-Video Ad Metric Specification
-While VAST covers some details about sending URIs that track video ad delivery, this document
-does not provide details on video ad-serving metrics or the best practices for tracking video ads.
-Please see the Digital Video Ad Metrics Definitions guidelines for details on tracking video ads.
+    <b>Video Ad Metric Specification</b>
+    While VAST covers some details about sending URIs that track video ad delivery, this document does not provide details on video ad-serving metrics or the best practices for tracking video ads. Please see the Digital Video Ad Metrics Definitions guidelines for details on tracking video ads.
 
-Video Player Execution of a VAST response
-VAST does not "do" anything; it's simply a mechanism for transferring data from one system to
-another. Video player technology must be able to parse a VAST ad server response and use the
-
-
-![Figure/context from original PDF page 12](assets/vast_3_0/page_12_figure_context.png)
-
-data in accordance with the guidelines in this document. This document provides detailed
-requirements for the display of the video ads in a VAST response, but does not provide a
-concrete technical implementation. Video player engineers can use the information in this
-document to design and build a VAST-compliant video player, using whatever technology the
-engineer prefers to use.
+    <b>Video Player Execution of a VAST response</b>
+    VAST does not "do" anything; it's simply a mechanism for transferring data from one system to another. Video player technology must be able to parse a VAST ad server response and use the data in accordance with the guidelines in this document. This document provides detailed requirements for the display of the video ads in a VAST response, but does not provide a concrete technical implementation. Video player engineers can use the information in this document to design and build a VAST-compliant video player, using whatever technology the engineer prefers to use.
 
 ## 2 VAST Implementation Details
-This section provides detailed requirements for ad servers and video players that wish to consider
-themselves compliant with VAST guidelines, thus ensuring that any two VAST-compliant systems behave
-as expected and therefore interoperable. Both the general VAST concepts and the requirements for
-different ad formats are provided.
+This section provides detailed requirements for ad servers and video players that wish to consider themselves compliant with VAST guidelines, thus ensuring that any two VAST-compliant systems behave as expected and therefore interoperable. Both the general VAST concepts and the requirements for different ad formats are provided.
 
 ### 2.1 Compliance
-VAST specifies both the format of the ad response and how the video player should handle the
-response. In order for VAST to be effective, both ad servers and video players must adopt the guidelines
-outlined in this document.
+VAST specifies both the format of the ad response and how the video player should handle the response. In order for VAST to be effective, both ad servers and video players must adopt the guidelines outlined in this document.
 
-In general, the video player need only accept ads that it requests and ad server responses should be
-displayed in the ad format intended. For example, if a video player requests a NonLinear Ad but receives
-a Linear Ad, the video player is not expected to display the Linear Ad. Similarly, if a standard Linear Ad is
-requested but a Skippable Linear Ad is received, the video player is not expected to display the
-Skippable Linear Ad nor should the video player play the Skippable Ad as a Linear Ad (without skip
-controls).
+In general, the video player need only accept ads that it requests and ad server responses should be displayed in the ad format intended. For example, if a video player requests a NonLinear Ad but receives a Linear Ad, the video player is not expected to display the Linear Ad. Similarly, if a standard Linear Ad is requested but a Skippable Linear Ad is received, the video player is not expected to display the Skippable Linear Ad nor should the video player play the Skippable Ad as a Linear Ad (without skip controls).
 
 Details for general support are included for each VAST Ad format in sections throughout this document.
 
 #### 2.1.1 Ad Server
-VAST-compliant ad servers must be able to serve ad responses that conform to the VAST XML schema
-defined in this document. Ad servers must also be able to receive the subsequent tracking and error
-requests that result from the video player's execution of the VAST ad response.
+VAST-compliant ad servers must be able to serve ad responses that conform to the VAST XML schema defined in this document. Ad servers must also be able to receive the subsequent tracking and error requests that result from the video player's execution of the VAST ad response.
 
 #### 2.1.2 Video Player
-VAST-compliant video players must be able to display the ad in a VAST response according to the
-instructions provided by the VAST ad response and according the video player's declared format
-support, which includes:
+VAST-compliant video players must be able to display the ad in a VAST response according to the instructions provided by the VAST ad response and according the video player's declared format support, which includes:
 
 - Rendering the ad asset(s) correctly
-- Respecting ad server instructions in a VAST response including those of any subsequent ad servers
-called in a chain of VAST wrapper responses, providing the responses are VAST-compliant
+- Respecting ad server instructions in a VAST response including those of any subsequent ad servers called in a chain of VAST wrapper responses, providing the responses are VAST-compliant
 - Responding to supported user-interactions
 - Sending appropriate tracking information back to the ad server
-- Supporting XML conventions such as standard comment syntax (i.e. acknowledge VAST comments in
-the standard XML syntax: &lt;!--comment--&gt;)
+- Supporting XML conventions such as standard comment syntax (i.e. acknowledge VAST comments in the standard XML syntax: &lt;!--comment--&gt;)
 
 Details for proper ad display and VAST support are defined throughout this document.
 
 ##### 2.1.2.1 Requesting VAST Ad Format
-In VAST 3.0, multiple formats are offered as options for VAST compliance. (See section 2.3 for details.)
-Publishers must declare which format(s) they support for compliance, but the video player should also
-be able to communicate which format it supports when requesting an ad. The mechanism to do this is
-outside the scope of VAST but should be considered.
+In VAST 3.0, multiple formats are offered as options for VAST compliance. (See section 2.3 for details.) Publishers must declare which format(s) they support for compliance, but the video player should also be able to communicate which format it supports when requesting an ad. The mechanism to do this is outside the scope of VAST but should be considered.
 
 ##### 2.1.2.2 Imposing VAST Structure
-Publishers are encouraged to set requirements (i.e. file size, video type, Companion specs, etc.) for what
-they will accept and display in their video players. Advertisers should always discuss publisher
-requirements when developing a video ad campaign.
+Publishers are encouraged to set requirements (i.e. file size, video type, Companion specs, etc.) for what they will accept and display in their video players. Advertisers should always discuss publisher requirements when developing a video ad campaign.
 
-However, when publishers also require that VAST ad responses include ONLY details for whatever meets
-their requirements, then the spirit of the cross-platform video ad delivery that VAST offers is lost.
+However, when publishers also require that VAST ad responses include ONLY details for whatever meets their requirements, then the spirit of the cross-platform video ad delivery that VAST offers is lost.
 
-For example, VAST offers a means for ad servers to include multiple media files: perhaps one for each
-video type that meets requirements for a variety of video players. Each video player can then parse the
-VAST response for the media file that meets Publisher requirements. Such a VAST response can be
-served across multiple video players without modification.
+For example, VAST offers a means for ad servers to include multiple media files: perhaps one for each video type that meets requirements for a variety of video players. Each video player can then parse the VAST response for the media file that meets Publisher requirements. Such a VAST response can be served across multiple video players without modification.
 
-If, however, a publisher stipulates that a VAST ad tag contain ONLY the elements that are relevant to its
-requirements (i.e. only one media file that meets its requirements), then the VAST response can only be
-served to that publisher (and any others that happen to have the exact same requirements).
+If, however, a publisher stipulates that a VAST ad tag contain ONLY the elements that are relevant to its requirements (i.e. only one media file that meets its requirements), then the VAST response can only be served to that publisher (and any others that happen to have the exact same requirements).
 
-Limiting an ad server's ability to create dynamic VAST responses with details that meet a wide range of
-requirements greatly limits the benefits that VAST was designed to offer. While VAST guidelines don't
-restrict publishers from imposing specific VAST structure, this practice is not recommended. Instead,
-publishers should consider accepting any VAST response containing ad information that meets
-requirements and ignoring any details not supported.
+Limiting an ad server's ability to create dynamic VAST responses with details that meet a wide range of requirements greatly limits the benefits that VAST was designed to offer. While VAST guidelines don't restrict publishers from imposing specific VAST structure, this practice is not recommended. Instead, publishers should consider accepting any VAST response containing ad information that meets requirements and ignoring any details not supported.
 
 #### 2.1.3 VAST Format Compliance
-VAST covers several distinct video ad formats, but ad serving and video publisher organizations may not
-want to support all formats. For example, some vendors may choose to serve only Linear ads with
-Companions. Likewise, some publishers may only want to support NonLinear ads in their video players.
+VAST covers several distinct video ad formats, but ad serving and video publisher organizations may not want to support all formats. For example, some vendors may choose to serve only Linear ads with Companions. Likewise, some publishers may only want to support NonLinear ads in their video players.
 
-In VAST 3.0, five video ad formats are specified so that video-advertising organizations may be compliant
-with VAST while only supporting a selected subset of the ad formats.
+In VAST 3.0, five video ad formats are specified so that video-advertising organizations may be compliant with VAST while only supporting a selected subset of the ad formats.
 
 The VAST compliance formats are as follows:
 
@@ -410,35 +248,26 @@ The VAST compliance formats are as follows:
 4. Skippable Linear Ads
 5. Ad Pods
 
-A company wishing to display IAB's seal for VAST compliance must declare which of the five ad formats
-their technology supports.
+A company wishing to display IAB's seal for VAST compliance must declare which of the five ad formats their technology supports.
 
-IAB VPAID and VMAP specs are excluded from the list of format compliance because both
-General specs are independent of each other and of VAST. Compliance with one spec does not
-Implementation Note imply compliance with any of the other specs. Compliance for either spec must be
-separately declared.
+|---|---|
+| General Implementation Note | IAB VPAID and VMAP specs are excluded from the list of format compliance because both specs are independent of each other and of VAST. Compliance with one spec does not imply compliance with any of the other specs. Compliance for either spec must be separately declared. |
 
 #### 2.1.4 Minimal Compliance
-In addition, regardless of which VAST formats a company declares to comply with, all ad servers and
-video players must comply with a broad set of general VAST functionality that applies across all
-categories, including the following:
+In addition, regardless of which VAST formats a company declares to comply with, all ad servers and video players must comply with a broad set of general VAST functionality that applies across all categories, including the following:
 
 1. Inline and Wrapper Ads (to support multiple ad-serving vendors)
 2. Tracking Events
 3. Error Reporting
 4. Industry Icons (such as for in-ads notice supporting OBA self-regulation)
 
-When working with any VAST compliant technology, a company should be able to expect that all of the
-above general functionality is supported.
+When working with any VAST compliant technology, a company should be able to expect that all of the above general functionality is supported.
 
 #### 2.1.5 Browser Security for Flash™ and JavaScript™
-Modern browsers restrict Adobe Flash and JavaScript runtime environments from retrieving data from
-other servers. Since typical VAST responses come from other servers, measures must be taken for each:
+Modern browsers restrict Adobe Flash and JavaScript runtime environments from retrieving data from other servers. Since typical VAST responses come from other servers, measures must be taken for each:
 
 ##### 2.1.5.1 crossdomain.xml for Flash
-To enable Flash video players to accept a VAST response, ad servers must provide a crossdomain.xml file
-at their root HTTP domain. For example, adserver.com should provide the file as follows:
-http://adserver.com/crossdomain.xml
+To enable Flash video players to accept a VAST response, ad servers must provide a crossdomain.xml file at their root HTTP domain. For example, adserver.com should provide the file as follows: http://adserver.com/crossdomain.xml
 
 Flash video players know to check the root domain of any server that sends it data.
 
@@ -449,51 +278,38 @@ The xml is a simple file that includes the following:
 <cross-domain-policy>
 ```
 
-The asterisks (*) value for the domain attribute enables any Flash video player to accept data from the
-server providing the crossdomain.xml file.
+The asterisks (*) value for the domain attribute enables any Flash video player to accept data from the server providing the crossdomain.xml file.
 
 For more information, visit http://kb2.adobe.com/cps/142/tn_14213.html
 
 ##### 2.1.5.2 Cross Origin Resource Sharing (CORS) for JavaScript
-In order for JavaScript video players to accept a VAST response, ad servers must include a CORS header
-in the http file that wraps the VAST response. The CORS header must be formatted as follows:
-Access-Control-Allow-Origin: &lt;origin header value&gt;
-Access-Control-Allow-Credentials: true
+In order for JavaScript video players to accept a VAST response, ad servers must include a CORS header in the http file that wraps the VAST response. 
 
-These HTTP headers allow an ads player on any origin to read the VAST response from the ad server
-origin. The value of Access-Control-Allow-Origin should be the value of the Origin header sent
-with the ad request.
+The CORS header must be formatted as follows:
+    Access-Control-Allow-Origin: &lt;origin header value&gt;
+    Access-Control-Allow-Credentials: true
 
-Setting the Access-Control-Allow-Credentials header to true will ensure that cookies will be
-sent and received properly.
+These HTTP headers allow an ads player on any origin to read the VAST response from the ad server origin. The value of Access-Control-Allow-Origin should be the value of the Origin header sent with the ad request.
+
+Setting the Access-Control-Allow-Credentials header to true will ensure that cookies will be sent and received properly.
 
 For more information, visit http://www.w3.org/TR/cors
 
 #### 2.1.6 XML Namespace
-Whenever VAST is used in conjunction with any other XML template, such as with VMAP or VAST
-extensions, a namespace should be declared for each so that the elements of one are not confused with
-the elements of another.
+Whenever VAST is used in conjunction with any other XML template, such as with VMAP or VAST extensions, a namespace should be declared for each so that the elements of one are not confused with the elements of another.
 
 For more information, visit: http://www.w3.org/TR/REC-xml-names/
 
 ### 2.2 General VAST Document Structure
-A VAST-compliant ad response is a well-formed XML document, compliant with XML 1.0 so that
-standard XML requirements such as character entities and &lt;!--XML comments--&gt; should be honored.
-It must also pass a schema check against the VAST 3.0 XML Schema Definition (XSD) that is distributed in
-conjunction with this document. Lastly, it must conform to certain additional dependencies that cannot
-be expressed in the VAST 3.0 XSD. These dependencies are outlined in this section and further described
-throughout this document.
+A VAST-compliant ad response is a well-formed XML document, compliant with XML 1.0 so that standard XML requirements such as character entities and &lt;!--XML comments--&gt; should be honored. It must also pass a schema check against the VAST 3.0 XML Schema Definition (XSD) that is distributed in conjunction with this document. Lastly, it must conform to certain additional dependencies that cannot be expressed in the VAST 3.0 XSD. These dependencies are outlined in this section and further described throughout this document.
 
 #### 2.2.1 Declaring the VAST response
-All VAST responses share the same general structure. Each VAST response is declared with &lt;VAST&gt; as its
-topmost element along with the version attribute indicating the official version with which the
-response is compliant. For example, a VAST 3.0 response is declared as follows:
+All VAST responses share the same general structure. Each VAST response is declared with &lt;VAST&gt; as its topmost element along with the version attribute indicating the official version with which the response is compliant. For example, a VAST 3.0 response is declared as follows:
 ```xml
 <VAST version="3.0">
 ```
 
-As with all XML documents, each element must be closed after details nested within the element are
-provided. The following example is a VAST response with one nested &lt;Ad&gt; element.
+As with all XML documents, each element must be closed after details nested within the element are provided. The following example is a VAST response with one nested &lt;Ad&gt; element.
 ```xml
 <VAST version="3.0">
 <Ad>
@@ -503,43 +319,22 @@ provided. The following example is a VAST response with one nested &lt;Ad&gt; el
 ```
 
 #### 2.2.2 The Root &lt;Ad&gt; Element
-Within the &lt;VAST&gt; element are one or more &lt;Ad&gt; elements. Advertisers and video content publishers
-may associate an &lt;Ad&gt; element with a line item video ad defined in contract documentation, usually an
-insertion order. These line item ads typically specify the creative to display, price, delivery schedule,
-targeting, and so on.
+Within the &lt;VAST&gt; element are one or more &lt;Ad&gt; elements. Advertisers and video content publishers may associate an &lt;Ad&gt; element with a line item video ad defined in contract documentation, usually an insertion order. These line item ads typically specify the creative to display, price, delivery schedule, targeting, and so on.
 
-In VAST, an &lt;Ad&gt; element contains all of the information necessary for the video player to display and
-track the Ad creative, and often maps back to the line item for the video ad in a contract between
-parties. While this association of the VAST &lt;Ad&gt; element with a line item in a contract is common, it's
-not always the case. Regardless of how contracts define an ad, VAST defines ads in a very structural way
-as described in the following sections.
+In VAST, an &lt;Ad&gt; element contains all of the information necessary for the video player to display and track the Ad creative, and often maps back to the line item for the video ad in a contract between parties. While this association of the VAST &lt;Ad&gt; element with a line item in a contract is common, it's not always the case. Regardless of how contracts define an ad, VAST defines ads in a very structural way as described in the following sections.
 
-A VAST response may offer multiple ads. A single &lt;Ad&gt; element is most common, and represents the
-case where only a single ad is to be displayed by the video player. Before VAST 3.0, only the single ad
-case was considered in developing guidelines. Now, two other responses are possible. The following
-diagram illustrates how the &lt;Ad&gt; element may be represented in a VAST response.
+A VAST response may offer multiple ads. A single &lt;Ad&gt; element is most common, and represents the case where only a single ad is to be displayed by the video player. Before VAST 3.0, only the single ad case was considered in developing guidelines. Now, two other responses are possible. The following diagram illustrates how the &lt;Ad&gt; element may be represented in a VAST response.
 
-Introduced in VAST 3.0 is the sequence attribute for Ads. The sequence attribute, represented in the
-two diagrams on the right in the figure above, enables ad servers to serve multiple ads as an Ad Pod to
-be played in sequence as indicated by sequence values.
+![Figure/context from original PDF page 17](assets/page_17_figure_context.png)
 
-A Pod may be served with other ads without sequence values, which are excluded from the Pod. These
-stand-alone ads may be considered part of an ad buffet, represented in the diagram on the right, from
-which the video player can choose if the Ad Pod cannot be displayed.
+Introduced in VAST 3.0 is the sequence attribute for Ads. The sequence attribute, represented in the two diagrams on the right in the figure above, enables ad servers to serve multiple ads as an Ad Pod to be played in sequence as indicated by sequence values.
 
-When multiple ads, whether part of a Pod or a collection of stand-alone ads, are included in a VAST
-response, the video player is only required to support multiple ad playbacks if it has declared that it
-supports multiple ads. If the video player cannot display an ad response with multiple ads, it can decline
-from loading the ad resources and send an error code. See section 2.3.5 for details on Ad Pods.
+A Pod may be served with other ads without sequence values, which are excluded from the Pod. These stand-alone ads may be considered part of an ad buffet, represented in the diagram on the right, from which the video player can choose if the Ad Pod cannot be displayed.
 
-Video Player If multiple &lt;Ad&gt; elements are provided with sequence attributes, they must be
-Implementation Note displayed as a Pod when the Ad Pod format is supported. If not supported or the Pod
-cannot be played, the video player should request to the error-tracking URI provided.
-A special exemption exists when using VMAP. Please see section 3.1 for information on
-VMAP.
+When multiple ads, whether part of a Pod or a collection of stand-alone ads, are included in a VAST response, the video player is only required to support multiple ad playbacks if it has declared that it supports multiple ads. If the video player cannot display an ad response with multiple ads, it can decline from loading the ad resources and send an error code. See section 2.3.5 for details on Ad Pods.
 
-
-![Figure/context from original PDF page 17](assets/vast_3_0/page_17_figure_context.png)
+|---|---|
+| Video Player Implementation Note | If multiple &lt;Ad&gt; elements are provided with sequence attributes, they must be displayed as a Pod when the Ad Pod format is supported. If not supported or the Pod cannot be played, the video player should request to the error-tracking URI provided. A special exemption exists when using VMAP. Please see section 3.1 for information on VMAP. |
 
 ##### 2.2.2.1 Ad Attributes
 Two attributes are available for the &lt;Ad&gt; element:
@@ -551,8 +346,9 @@ Two attributes are available for the &lt;Ad&gt; element:
 ```
 
 ##### 2.2.2.2 Ad Structure
-Each &lt;Ad&gt; contains a single &lt;InLine&gt; element or &lt;Wrapper&gt; element (but never both) as illustrated
-in the following diagram.
+Each &lt;Ad&gt; contains a single &lt;InLine&gt; element or &lt;Wrapper&gt; element (but never both) as illustrated in the following diagram.
+
+![Figure/context from original PDF page 18](assets/page_18_figure_context.png)
 
 #### 2.2.3 The &lt;Wrapper&gt; Element
 The &lt;Wrapper&gt; element contains a URI reference to a vendor ad server (often called a third party ad
@@ -575,7 +371,7 @@ should request when the first frame of the ad is displayed
 - &lt;Creatives&gt;: the container for one or more &lt;Creative&gt; elements
 
 
-![Figure/context from original PDF page 18](assets/vast_3_0/page_18_figure_context.png)
+
 
 Thus far, the VAST response structure can be represented as follows:
 
