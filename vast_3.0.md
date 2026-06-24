@@ -133,7 +133,6 @@ The diagram below illustrates the process for serving ads when a secondary ad se
 
 ![Figure/context from original PDF page 10](assets/page_10_figure_context.png)
 
-
 1. <b>VAST Request:</b> The video player sends a request to the primary ad server.
 2. <b>VAST Redirect:</b> During campaign set up, the advertising party (possibly an agency or network) sends a VAST Wrapper response identifying resources from a secondary ad server. The following example provides an excerpt of a VAST Wrapper response:
 ```xml
@@ -1694,106 +1693,7 @@ The intent of this section is to provide guidance to video player and ad server 
 
 ## 6 Human Readable VAST XML Schema
 
-<table style="border-collapse: collapse; width: 100%;">
-<thead>
-<tr style="background-color: #000000; color: #ffffff;">
-<th style="text-align: left; padding: 4px 8px;">Element</th>
-<th style="text-align: left; padding: 4px 8px;">Attributes</th>
-<th style="text-align: left; padding: 4px 8px;">Required</th>
-</tr>
-</thead>
-<tbody>
-<tr><td style="padding: 4px 8px; background-color: #404040; color: #ffffff;">VAST</td><td style="padding: 4px 8px; background-color: #404040; color: #ffffff;">version</td><td style="padding: 4px 8px; background-color: #404040; color: #ffffff;">Yes</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;/Error</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px; background-color: #808080; color: #ffffff;">VAST/Ad</td><td style="padding: 4px 8px; background-color: #808080; color: #ffffff;">id, sequence</td><td style="padding: 4px 8px; background-color: #808080; color: #ffffff;">Yes</td></tr>
-<tr><td style="padding: 4px 8px; background-color: #bfbfbf;">VAST/Ad/InLine</td><td style="padding: 4px 8px; background-color: #bfbfbf;"></td><td style="padding: 4px 8px; background-color: #bfbfbf;">Yes*</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;/AdSystem</td><td style="padding: 4px 8px;">version</td><td style="padding: 4px 8px;">Yes</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;/AdTitle</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">Yes</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;/Description</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;/Advertiser</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;/Pricing</td><td style="padding: 4px 8px;">model, currency</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;/Survey</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;/Error</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;/Impression</td><td style="padding: 4px 8px;">id</td><td style="padding: 4px 8px;">Yes</td></tr>
-<tr><td style="padding: 4px 8px; background-color: #bfbfbf;">&nbsp;&nbsp;/Creatives</td><td style="padding: 4px 8px; background-color: #bfbfbf;"></td><td style="padding: 4px 8px; background-color: #bfbfbf;">Yes</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;/Creative</td><td style="padding: 4px 8px;">id, sequence, adID, apiFramework</td><td style="padding: 4px 8px;">Yes</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/CretiveExtensions</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/CreativeExtension</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;"></td></tr>
-<tr><td style="padding: 4px 8px; background-color: #e6e6e6;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Linear</td><td style="padding: 4px 8px; background-color: #e6e6e6;">skipoffset</td><td style="padding: 4px 8px; background-color: #e6e6e6;">Yes*</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/AdParameters</td><td style="padding: 4px 8px;">xmlEncoded</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Duration</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">Yes</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/MediaFiles</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">Yes</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/MediaFile</td><td style="padding: 4px 8px;">id, delivery, type, bitrate, minBitrate, maxBitrate, width, height, scalable, mantainAspectRatio, codec, apiFramework</td><td style="padding: 4px 8px;">Yes</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/TrackingEvents</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Tracking</td><td style="padding: 4px 8px;">event</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/VideoClicks</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/ClickThrough</td><td style="padding: 4px 8px;">id</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/ClickTracking</td><td style="padding: 4px 8px;">id</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/CustomClick</td><td style="padding: 4px 8px;">id</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Icons</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Icon</td><td style="padding: 4px 8px;">program, width, height, xPosition, yPosition, duration, offset, apiFramework</td><td style="padding: 4px 8px;">Yes*</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/StaticResource<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/IFrameResource<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/HTMLResource</td><td style="padding: 4px 8px;">creativeType (StaticResource only)</td><td style="padding: 4px 8px;">Yes*</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/IconClicks</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/IconClickThrough</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/IconClickTracking</td><td style="padding: 4px 8px;">id</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/IconViewTracking</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px; background-color: #e6e6e6;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/CompanionAds</td><td style="padding: 4px 8px; background-color: #e6e6e6;">required</td><td style="padding: 4px 8px; background-color: #e6e6e6;">Yes*</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Companion</td><td style="padding: 4px 8px;">id, width, height, assetWidth, assetHeight, expandedWidth, expandedHeight, apiFramework, adSlotID</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/StaticResource<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/IFrameResource<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/HTMLResource</td><td style="padding: 4px 8px;">creativeType (StaticResource only)</td><td style="padding: 4px 8px;">Yes*</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/AdParameters</td><td style="padding: 4px 8px;">xmlEncoded</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/AltText</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/CompanionClickThrough</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/CompanionClickTracking</td><td style="padding: 4px 8px;">id</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/TrackingEvents</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Tracking</td><td style="padding: 4px 8px;">event</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px; background-color: #e6e6e6;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/NonLinearAds</td><td style="padding: 4px 8px; background-color: #e6e6e6;"></td><td style="padding: 4px 8px; background-color: #e6e6e6;">Yes*</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/NonLinear</td><td style="padding: 4px 8px;">id, width, height, expandedWidth, expandedHeight, scalable, maintainAspectRatio, minSuggestedDuration, apiFramework</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/StaticResource<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/IFrameResource<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/HTMLResource</td><td style="padding: 4px 8px;">creativeType (StaticResource only)</td><td style="padding: 4px 8px;">Yes*</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/NonLinearClickThrough</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/NonLinearClickTracking</td><td style="padding: 4px 8px;">id</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/AdParameters</td><td style="padding: 4px 8px;">xmlEncoded</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/TrackingEvents</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Tracking</td><td style="padding: 4px 8px;">event</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;/Extensions</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;/Extension</td><td style="padding: 4px 8px;">type</td><td style="padding: 4px 8px;">Yes*</td></tr>
-<tr><td style="padding: 4px 8px; background-color: #808080; color: #ffffff;">VAST/Ad/Wrapper</td><td style="padding: 4px 8px; background-color: #808080; color: #ffffff;"></td><td style="padding: 4px 8px; background-color: #808080; color: #ffffff;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;/AdSystem</td><td style="padding: 4px 8px;">version</td><td style="padding: 4px 8px;">Yes</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;/VASTAdTagURI</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">Yes</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;/Error</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;/Impression</td><td style="padding: 4px 8px;">id</td><td style="padding: 4px 8px;">Yes</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;/Creatives</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;/Creative</td><td style="padding: 4px 8px;">id, sequence, adID</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px; background-color: #e6e6e6;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Linear</td><td style="padding: 4px 8px; background-color: #e6e6e6;"></td><td style="padding: 4px 8px; background-color: #e6e6e6;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/TrackingEvents</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Tracking</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/VideoClicks</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/ClickTracking</td><td style="padding: 4px 8px;">id</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/CustomClick</td><td style="padding: 4px 8px;">id</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Icons</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Icon</td><td style="padding: 4px 8px;">program, width, height, xPosition, yPosition, duration, offset, apiFramework</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/StaticResource<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/IFrameResource<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/HTMLResource</td><td style="padding: 4px 8px;">creativeType (StaticResource only)</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/IconClicks</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/IconClickThrough</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/IconClickTracking</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/IconViewTracking</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px; background-color: #e6e6e6;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/CompanionAds</td><td style="padding: 4px 8px; background-color: #e6e6e6;">required</td><td style="padding: 4px 8px; background-color: #e6e6e6;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Companion</td><td style="padding: 4px 8px;">id, width, height, assetWidth, assetHeight, expandedWidth, expandedHeight, apiFramework, adSlotID</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/StaticResource<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/IFrameResource<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/HTMLResource</td><td style="padding: 4px 8px;">creativeType (StaticResource only)</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/AdParameters</td><td style="padding: 4px 8px;">xmlEncoded</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/AltText</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/CompanionClickThrough</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/CompanionClickTracking</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/TrackingEvents</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Tracking</td><td style="padding: 4px 8px;">event</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px; background-color: #e6e6e6;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/NonLinearAds</td><td style="padding: 4px 8px; background-color: #e6e6e6;"></td><td style="padding: 4px 8px; background-color: #e6e6e6;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/NonLinear</td><td style="padding: 4px 8px;">id, width, height, expandedWidth, expandedHeight, scalable, maintainAspectRatio, minSuggestedDuration, apiFramework</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/NonLinearClickTracking</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/TrackingEvents</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Tracking</td><td style="padding: 4px 8px;">event</td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;/Extensions</td><td style="padding: 4px 8px;"></td><td style="padding: 4px 8px;">No</td></tr>
-<tr><td style="padding: 4px 8px;">&nbsp;&nbsp;&nbsp;&nbsp;/Extension</td><td style="padding: 4px 8px;">type</td><td style="padding: 4px 8px;">Yes*</td></tr>
-</tbody>
-</table>
+![Figure/context from original PDF page 10](assets/vast_xml_schema_table_seamless.png)
 
 *Either one of listed elements is required or the requirement for the element is dependent on whether a parent element is used. In the case of Inline creative, at least one element of either Linear, NonLinearAds, or CompanionAds is required.
 
