@@ -250,6 +250,7 @@ The VAST compliance formats are as follows:
 
 A company wishing to display IAB's seal for VAST compliance must declare which of the five ad formats their technology supports.
 
+|||
 |---|---|
 | General Implementation Note | IAB VPAID and VMAP specs are excluded from the list of format compliance because both specs are independent of each other and of VAST. Compliance with one spec does not imply compliance with any of the other specs. Compliance for either spec must be separately declared. |
 
@@ -333,12 +334,12 @@ A Pod may be served with other ads without sequence values, which are excluded f
 
 When multiple ads, whether part of a Pod or a collection of stand-alone ads, are included in a VAST response, the video player is only required to support multiple ad playbacks if it has declared that it supports multiple ads. If the video player cannot display an ad response with multiple ads, it can decline from loading the ad resources and send an error code. See section 2.3.5 for details on Ad Pods.
 
+|||
 |---|---|
 | Video Player Implementation Note | If multiple &lt;Ad&gt; elements are provided with sequence attributes, they must be displayed as a Pod when the Ad Pod format is supported. If not supported or the Pod cannot be played, the video player should request to the error-tracking URI provided. A special exemption exists when using VMAP. Please see section 3.1 for information on VMAP. |
 
 ##### 2.2.2.1 Ad Attributes
 Two attributes are available for the &lt;Ad&gt; element:
-
 - id: an ad server-defined identifier string for the ad
 - sequence: a number greater than zero (0) that identifies the sequence in which an ad should play; all
 ```xml
@@ -351,229 +352,180 @@ Each &lt;Ad&gt; contains a single &lt;InLine&gt; element or &lt;Wrapper&gt; elem
 ![Figure/context from original PDF page 18](assets/page_18_figure_context.png)
 
 #### 2.2.3 The &lt;Wrapper&gt; Element
-The &lt;Wrapper&gt; element contains a URI reference to a vendor ad server (often called a third party ad
-server). The destination ad server either provides the ad files within a VAST &lt;InLine&gt; ad element or
-may provide a secondary Wrapper ad, pointing to yet another ad server. Eventually, the final ad server
-in the ad supply chain must contain all the necessary files needed to display the ad. See section 2.4.1 for
-more details on Wrapper ads.
+The &lt;Wrapper&gt; element contains a URI reference to a vendor ad server (often called a third party ad server). The destination ad server either provides the ad files within a VAST &lt;InLine&gt; ad element or may provide a secondary Wrapper ad, pointing to yet another ad server. Eventually, the final ad server in the ad supply chain must contain all the necessary files needed to display the ad. See section 2.4.1 for more details on Wrapper ads.
 
 #### 2.2.4 The &lt;InLine&gt; Element
-The last ad server in the ad supply chain serves an &lt;InLine&gt; element. Within the nested elements of
-an &lt;InLine&gt; element are all the files and URIs necessary to display the ad.
+The last ad server in the ad supply chain serves an &lt;InLine&gt; element. Within the nested elements of an &lt;InLine&gt; element are all the files and URIs necessary to display the ad.
 
 ##### 2.2.4.1 Required InLine Elements
 Contained directly within the &lt;InLine&gt; element are the following required elements:
 
 - &lt;AdSystem&gt;: the name of the ad server that returned the ad
 - &lt;AdTitle&gt;: the common name of the ad
-- &lt;Impression&gt;: a URI that directs the video player to a tracking resource file that the video player
-should request when the first frame of the ad is displayed
+- &lt;Impression&gt;: a URI that directs the video player to a tracking resource file that the video player should request when the first frame of the ad is displayed
 - &lt;Creatives&gt;: the container for one or more &lt;Creative&gt; elements
 
-
-
-
 Thus far, the VAST response structure can be represented as follows:
+
+![Figure/context from original PDF page 19](assets/page_19_figure_context.png)
 
 ##### 2.2.4.2 Optional InLine Elements
 The following may also be contained within the &lt;InLine&gt; element, but these elements are optional:
 
 - &lt;Description&gt;: a string value that provides a longer description of the ad.
-- &lt;Advertiser&gt;: the name of the advertiser as defined by the ad serving party. This element can be
-used to prevent displaying ads with advertiser competitors. Ad serving parties and publishers should
-identify how to interpret values provided within this element. As with any optional elements, the video
-player is not required to support it.
-- &lt;Survey&gt;: a URI to a survey vendor that could be the survey, a tracking pixel, or anything to do with
-the survey. Multiple survey elements can be provided. A type attribute is available to specify the MIME
-type being served. For example, the attribute might be set to type="text/javascript". Surveys
-can be dynamically inserted into the VAST response as long as cross-domain issues are avoided.
-- &lt;Error&gt;: a URI representing an error-tracking pixel; this element can occur multiple times. Errors are
-defined in section 2.4.2.3.
-- &lt;Pricing&gt;: provides a value that represents a price that can be used by real-time bidding (RTB)
-systems. VAST is not designed to handle RTB since other methods exist, but this element is offered for
-custom solutions if needed. If used, the following two attributes must be identified:
+- &lt;Advertiser&gt;: the name of the advertiser as defined by the ad serving party. This element can be used to prevent displaying ads with advertiser competitors. Ad serving parties and publishers should identify how to interpret values provided within this element. As with any optional elements, the video player is not required to support it.
+- &lt;Survey&gt;: a URI to a survey vendor that could be the survey, a tracking pixel, or anything to do with the survey. Multiple survey elements can be provided. A type attribute is available to specify the MIME type being served. For example, the attribute might be set to type="text/javascript". Surveys can be dynamically inserted into the VAST response as long as cross-domain issues are avoided.
+- &lt;Error&gt;: a URI representing an error-tracking pixel; this element can occur multiple times. Errors are defined in section 2.4.2.3.
+- &lt;Pricing&gt;: provides a value that represents a price that can be used by real-time bidding (RTB) systems. VAST is not designed to handle RTB since other methods exist, but this element is offered for custom solutions if needed. If used, the following two attributes must be identified:
 o model: identifies the pricing model as one of "CPM", "CPC", "CPE", or "CPV".
-o currency: the 3-letter ISO-4217 currency symbol that identifies the currency of the value
-provided (i.e. USD, GBP, etc.…)
-If the value provided is to be obfuscated/encoded, publishers and advertisers must negotiate the
-appropriate mechanism to do so. When included as part of a VAST Wrapper in a chain of Wrappers,
+o currency: the 3-letter ISO-4217 currency symbol that identifies the currency of the value provided (i.e. USD, GBP, etc.…)
+If the value provided is to be obfuscated/encoded, publishers and advertisers must negotiate the appropriate mechanism to do so. When included as part of a VAST Wrapper in a chain of Wrappers,
 only the value offered in the first Wrapper need be considered.
-- &lt;Extensions&gt;: XML node for custom extensions, as defined by the ad server. When used, a custom
-element should be nested under &lt;Extensions&gt; to help separate custom XML elements from VAST
-elements. The following example includes a custom xml element within the Extensions element.
+- &lt;Extensions&gt;: XML node for custom extensions, as defined by the ad server. When used, a custom element should be nested under &lt;Extensions&gt; to help separate custom XML elements from VAST elements. The following example includes a custom xml element within the Extensions element.
 
 ```xml
 <Extensions> <CustomXML>…</CustomXML></Extensions>
 ```
 
-
-![Figure/context from original PDF page 19](assets/vast_3_0/page_19_figure_context.png)
-
 #### 2.2.5 VAST Tracking
-Tracking an ad served in VAST format is done using a collection of VAST tracking elements at different
-levels in the VAST response. These tracking elements each contain a URI to a resource file or location on
-the ad server that sent the VAST response. The resource file is usually (but not always) a 1x1 transparent
-pixel image (i.e. tracking pixel) that when called, records an event that is specific to that tracking pixel.
+Tracking an ad served in VAST format is done using a collection of VAST tracking elements at different levels in the VAST response. These tracking elements each contain a URI to a resource file or location on the ad server that sent the VAST response. The resource file is usually (but not always) a 1x1 transparent pixel image (i.e. tracking pixel) that when called, records an event that is specific to that tracking pixel.
 
-Video Player The video player is responsible for requesting tracking pixels at appropriate times
-Implementation Note during the execution of a VAST ad response.
+|||
+|---|---|
+|Video Player Implementation Note | The video player is responsible for requesting tracking pixels at appropriate times during the execution of a VAST ad response. |
 
-Most tracking elements are optional for the ad server to include, but if included, the video player is
-required to request the resource file from the URI provided at the appropriate times. Advertisers and
-publishers depend on accurate tracking records for billing, campaign effectiveness, market analysis, and
-other important business intelligence and accounting. Good tracking practices throughout the industry
-are important to the success and growth of digital video advertising.
+Most tracking elements are optional for the ad server to include, but if included, the video player is required to request the resource file from the URI provided at the appropriate times. Advertisers and publishers depend on accurate tracking records for billing, campaign effectiveness, market analysis, and other important business intelligence and accounting. Good tracking practices throughout the industry are important to the success and growth of digital video advertising.
 
-The video player must send requests to the URIs provided in tracking elements;
-however, the video player is not required to do anything with the response that is
-General
-Implementation Note
-returned. The response is only to acknowledge an event and to comply with the
-HTTP protocol. This response is typically a 200 with a 1x1 pixel image in the
-response body (although the response could be of any other type).
+|||
+|---|---|
+| General Implementation Note | The video player must send requests to the URIs provided in tracking elements; however, the video player is not required to do anything with the response that is returned. The response is only to acknowledge an event and to comply with the HTTP protocol. This response is typically a 200 with a 1x1 pixel image in the response body (although the response could be of any other type). |
 
 ##### 2.2.5.1 Summary of VAST Tracking Elements
 The following list of VAST tracking elements summarizes tracking options offered at each level in VAST.
 
-```xml
-<VAST> Tracking Elements
-- <Error> contains a URI to a tracking resource that the video player should request upon receiving a
-"no ad" response
-```
+<b>&lt;VAST&gt; Tracking Elements</b>
+- <b>&lt;Error&gt;</b> contains a URI to a tracking resource that the video player should request upon receiving a "no ad" response
+  
+<b>&lt;InLine&gt; and &lt;Wrapper&gt; Tracking Elements</b>
+- <b>&lt;Error&gt;</b> contains a URI to a tracking resource that the video player should request if for some reason the InLine ad could not be served
+- <b>&lt;Impression&gt;</b> contains a URI to a tracking resource that the video player should request when the ad "impression" metric should be counted, typically when the first frame of the InLine ad is displayed to the user
 
-```xml
-<InLine> and <Wrapper> Tracking Elements
-- <Error> contains a URI to a tracking resource that the video player should request if for some reason
-the InLine ad could not be served
-- <Impression> contains a URI to a tracking resource that the video player should request when the
-ad "impression" metric should be counted, typically when the first frame of the InLine ad is displayed to
-the user
-```
+<b>&lt;Linear&gt; Tracking Elements</b>
+- <b>&lt;TrackingEvents&gt;</b> a container for the elements of the following type:
+  - <b>&lt;Tracking&gt;</b> contains a URI to a tracking resource that the video player should request when a specific named event occurs during the playback of the Linear creative (the event name is passed as an attribute of this element); the server can use requests to this URL for tracking metrics associated with specified events
+- <b>&lt;VideoClicks&gt;</b> a container for elements of the following types:
+  - <b>&lt;ClickThrough&gt;</b> contains a URI to a page that the video player should request and display in a Web browser window when the user clicks within the video frame while the Linear ad is played (known as the "clickthrough" or "landing page" URI); the server can also use requests to this URI for tracking the "clickthrough" metric
+  - <b>&lt;ClickTracking&gt;</b> contains a URI to a location or file that the video player should request when the user clicks within the video frame while the Linear ad is played; the server can also use requests to this URI for tracking the "clickthrough" metric o &lt;CustomClick&gt; contains a URI to a location or file that the video player should request when the user clicks on a particular button, link, or other call to action associated with the Linear ad during its playback, but which does not open a new page in a Web browser window; the ClickThrough and CustomClick URLs should never be requested at the same time (i.e. for the same click)
+- <b>&lt;IconClicks&gt;</b> a container in the Icons/Icone element for elements of the following types:
+  - <b>&lt;IconClickThrough&gt;</b> contains a URI for a Webpage that the video player should open in
+a Web browser window when the user clicks on the Icon creative that is displayed in association with the ad; may also be used to track the click
+  - <b>&lt;IconClickTracking&gt;</b> contains a URI to a location or file that the video player should request when the user clicks on the Icon creative
+- <b>&lt;IconViewTracking&gt;</b> contains a URI to a location or file that the video player should request when the Icons/Icon creative is displayed to the user
+  
+<b>&lt;Companion> Tracking Elements (See Section 2.2.5.2 for more information)</b>
+- <b>&lt;CompanionClickThrough&gt;</b> contains a URI for a Webpage that the video player should open in a Web browser window when the user clicks on the companion creative; URI may also be used to track the clickthrough
+- <b>&lt;CompanionClickTracking&gt;</b> contains a URI to a location or file that the video player should request when the user clicks on the companion creative; used to track the clickthrough for InLine creative when the creative handles the click; in a Wrapper Ad the URI is used to track clickthroughs for the InLine response that results after the Wrapper
 
-```xml
-<Linear> Tracking Elements
-- <TrackingEvents> a container for the elements of the following type:
-o <Tracking> contains a URI to a tracking resource that the video player should request when
-a specific named event occurs during the playback of the Linear creative (the event name is
-passed as an attribute of this element); the server can use requests to this URL for tracking
-metrics associated with specified events
-- <VideoClicks> a container for elements of the following types:
-o <ClickThrough> contains a URI to a page that the video player should request and display
-in a Web browser window when the user clicks within the video frame while the Linear ad is
-played (known as the "clickthrough" or "landing page" URI); the server can also use requests
-to this URI for tracking the "clickthrough" metric
-```
+<b>&lt; NonLinearAds&gt; Tracking Elements</b>
+- <b>&lt;TrackingEvents&gt;</b> a container for elements of the following type:
+  - <b>&lt;Tracking&gt;</b> contains a URI to a location or file that the video player should request when a specific named event occurs during the playback of the Nonlinear creative (the event name is passed as an attribute of this element); the server can use requests to this URL for tracking metrics associated with these events
 
-o &lt;ClickTracking&gt; contains a URI to a location or file that the video player should request
-when the user clicks within the video frame while the Linear ad is played; the server can also
-use requests to this URI for tracking the "clickthrough" metric
-o &lt;CustomClick&gt; contains a URI to a location or file that the video player should request
-when the user clicks on a particular button, link, or other call to action associated with the
-Linear ad during its playback, but which does not open a new page in a Web browser
-window; the ClickThrough and CustomClick URLs should never be requested at the same time
-(i.e. for the same click)
-- &lt;IconClicks&gt; a container in the Icons/Icone element for elements of the following types:
-o &lt;IconClickThrough&gt; contains a URI for a Webpage that the video player should open in
-a Web browser window when the user clicks on the Icon creative that is displayed in
-association with the ad; may also be used to track the click
-o &lt;IconClickTracking&gt; contains a URI to a location or file that the video player should
-request when the user clicks on the Icon creative
-- &lt;IconViewTracking&gt; contains a URI to a location or file that the video player should request when
-the Icons/Icon creative is displayed to the user
+<b>&lt; NonLinear&gt; Tracking Elements (See Section 2.2.5.2 for more information)</b>
+- <b>&lt;NonLinearClickThrough&gt;</b> contains a URI for a Webpage that the video player should open in a Web browser window when the user clicks on the Nonlinear creative
+- </b>&lt;NonLinearClickTracking&gt;</b> contains a URI to a location or file that the video player should request when the user clicks on the Nonlinear creative; used to track an InLine clickthrough when the creative handles the click; in a Wrapper Ad the URI is used to track clickthroughs for the InLine response that results after the Wrapper
 
-```xml
-<Companion> Tracking Elements (See Section 2.2.5.2 for more information)
-- <CompanionClickThrough> contains a URI for a Webpage that the video player should open in a
-Web browser window when the user clicks on the companion creative; URI may also be used to track
-the clickthrough
-- <CompanionClickTracking> contains a URI to a location or file that the video player should
-request when the user clicks on the companion creative; used to track the clickthrough for InLine
-creative when the creative handles the click; in a Wrapper Ad the URI is used to track clickthroughs for
-the InLine response that results after the Wrapper
-```
-
-&lt; NonLinearAds&gt; Tracking Elements
-- &lt;TrackingEvents&gt; a container for elements of the following type:
-o &lt;Tracking&gt; contains a URI to a location or file that the video player should request when a
-specific named event occurs during the playback of the Nonlinear creative (the event name is
-passed as an attribute of this element); the server can use requests to this URL for tracking
-metrics associated with these events
-
-&lt; NonLinear&gt; Tracking Elements (See Section 2.2.5.2 for more information)
-- &lt;NonLinearClickThrough&gt; contains a URI for a Webpage that the video player should open in
-a Web browser window when the user clicks on the Nonlinear creative
-- &lt;NonLinearClickTracking&gt; contains a URI to a location or file that the video player should
-request when the user clicks on the Nonlinear creative; used to track an InLine clickthrough when the
-creative handles the click; in a Wrapper Ad the URI is used to track clickthroughs for the InLine
-response that results after the Wrapper
-
-All tracking elements are available in both the InLine and Wrapper formats EXCEPT for the &lt;Error&gt;
-element at the &lt;VAST&gt; level since it is only used when an InLine response is not returned.
+All tracking elements are available in both the InLine and Wrapper formats EXCEPT for the &lt;Error&gt; element at the &lt;VAST&gt; level since it is only used when an InLine response is not returned.
 
 ##### 2.2.5.2 ClickThrough and ClickTracking Elements
-NonLinear and Companion creative that are of a &lt;StaticResource&gt; type (i.e. an image) need a way to
-provide a clickthrough URI that directs users to the advertiser's Webpage when they click the ad. The
-VAST elements for &lt;NonLinearClickThrough&gt; and &lt;CompanionClickThrough&gt; enable advertisers to
+NonLinear and Companion creative that are of a &lt;StaticResource&gt; type (i.e. an image) need a way to provide a clickthrough URI that directs users to the advertiser's Webpage when they click the ad. The VAST elements for &lt;NonLinearClickThrough&gt; and &lt;CompanionClickThrough&gt; enable advertisers to include a clickthrough URI for static image creative. In most cases, this clickthrough also provides tracking information that notifies appropriate parties that the ad was clicked.
 
-include a clickthrough URI for static image creative. In most cases, this clickthrough also provides
-tracking information that notifies appropriate parties that the ad was clicked.
+However, using an API such as VPAID for communication between the video player and the ad unit, the ad unit may handle the clickthrough. The &lt;NonLinearClickTracking&gt; element for NonLinear creative and the &lt;CompanionClickTracking&gt; element for Companion creative enable tracking in this case.
 
-However, using an API such as VPAID for communication between the video player and the ad unit, the
-ad unit may handle the clickthrough. The &lt;NonLinearClickTracking&gt; element for NonLinear creative and
-the &lt;CompanionClickTracking&gt; element for Companion creative enable tracking in this case.
+Also, since only the InLine creative should provide a clickthrough, the click-tracking elements can be used to track clickthroughs in the InLine creative from a Wrapper response.
 
-Also, since only the InLine creative should provide a clickthrough, the click-tracking elements can be
-used to track clickthroughs in the InLine creative from a Wrapper response.
+The table below describes which element to use for select static resource creative in VAST InLine and Wrapper responses.
 
-The table below describes which element to use for select static resource creative in VAST InLine and
-Wrapper responses.
 
-StaticResource Creative Type InLine Creative Wrapper Creative
-NonLinear
-Image &lt;NonLinearClickThrough&gt; &lt;NonLinearClickTracking&gt;
+<table>
+  <thead>
+    <tr>
+      <th>StaticResource Creative Type</th>
+      <th>Inline Creative</th>
+      <th>Wrapper Creative</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th colspan="3">NonLinear</th>
+    </tr>
+    <tr>
+      <td>Image</td>
+      <td>&lt;NonLinearClickThrough&gt;</td>
+      <td>&lt;NonLinearClickTracking&gt;</td>
+    </tr>
+    <tr>
+      <td>Flash with no apiFramework</td>
+      <td>&lt;NonLinearClickThrough&gt;</td>
+      <td>&lt;NonLinearClickTracking&gt;</td>
+    </tr>
+    <tr>
+      <td>Flash with apiFramework = clickTAG</td>
+      <td>&lt;NonLinearClickThrough&gt;</td>
+      <td>&lt;NonLinearClickTracking&gt;</td>
+    </tr>
+    <tr>
+      <td>Any static resource where the video player handles the click (i.e. playerHandlesClick=true in VPAID)</td>
+      <td>&lt;NonLinearClickThrough&gt;</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>Any static resource where the ad unit handles the clickthrough (i.e. playerHandlesClick=false in VPAID)</td>
+      <td>&lt;NonLinearClickTracking&gt;</td>
+      <td>&lt;NonLinearClickTracking&gt;</td>
+    </tr>
+    <tr>
+      <th colspan="3">Companion*</th>
+    </tr>
+    <tr>
+      <td>Image</td>
+      <td>&lt;CompanionClickThrough&gt;</td>
+      <td>&lt;CompanionClickTracking&gt;*</td>
+    </tr>
+    <tr>
+      <td>Flash with no apiFramework</td>
+      <td>&lt;CompanionClickThrough&gt;</td>
+      <td>&lt;CompanionClickTracking&gt;*</td>
+    </tr>
+    <tr>
+      <td>Flash with apiFramework = clickTAG</td>
+      <td>&lt;CompanionClickThrough&gt;</td>
+      <td>&lt;CompanionClickTracking&gt;*</td>
+    </tr>
+    <tr>
+      <td>Any static resource where the video player handles the click (i.e. playerHandlesClick=true in VPAID)</td>
+      <td>&lt;CompanionClickThrough&gt;</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>Any static resource where the ad unit handles the clickthrough (i.e. playerHandlesClick=false in VPAID)</td>
+      <td>&lt;CompanionClickTracking&gt;</td>
+      <td>&lt;CompanionClickTracking&gt;</td>
+    </tr>
+  </tbody>
+</table>
 
-Flash with no apiFramework &lt;NonLinearClickThrough&gt; &lt;NonLinearClickTracking&gt;
-
-Flash with apiFramework = &lt;NonLinearClickThrough&gt; &lt;NonLinearClickTracking&gt;
-clickTAG
-
-Any static resource where the &lt;NonLinearClickThrough&gt; N/A
-video player handles the click (i.e.
-playerHandlesClick=true in VPAID)
-
-Any static resource where the ad &lt;NonLinearClickTracking&gt; &lt;NonLinearClickTracking&gt;
-unit handles the clickthrough (i.e.
-playerHandlesClick=false in VPAID)
-Companion*
-Image &lt;CompanionClickThrough&gt; &lt;CompanionClickTracking&gt;*
-
-Flash with no apiFramework &lt;CompanionClickThrough&gt; &lt;CompanionClickTracking&gt;*
-
-Flash with apiFramework = &lt;CompanionClickThrough&gt; &lt;CompanionClickTracking&gt;*
-clickTAG
-
-Any static resource where the &lt;CompanionClickThrough&gt; N/A
-video player handles the click (i.e.
-playerHandlesClick=true in VPAID)
-
-Any static resource where the ad &lt;CompanionClickTracking&gt; &lt;CompanionClickTracking&gt;
-unit handles the clickthrough (i.e.
-playerHandlesClick=false in VPAID)
 *When tracking clicks for Companion creative in a Wrapper that also include the creative resource files, then
 Companion creative should be treated as InLine creative and the &lt;CompanionClickThrough&gt; element should be used.
 
 
 ##### 2.2.5.3 The &lt;Impression&gt; Element
-The &lt;InLine&gt; element in a VAST response contains one or more &lt;Impression&gt; elements. Each
-```xml
-<Impression> element contains exactly one child CDATA-wrapped URI. If multiple impression resource
-files are necessary for a creative (such as when multiple systems wish to be notified of the impression),
-then an <Impression> element must be included for each impression resource, each with a unique
+The &lt;InLine&gt; element in a VAST response contains one or more &lt;Impression&gt; elements. Each &lt;Impression&gt; element contains exactly one child CDATA-wrapped URI. If multiple impression resource files are necessary for a creative (such as when multiple systems wish to be notified of the impression),
+then an &lt;Impression&gt; element must be included for each impression resource, each with a unique
 URI.
-```
 
-VAST URIs and any other free text fields that might contain potentially dangerous characters should be
-wrapped in a CDATA block as demonstrated in the following example:
+![Figure/context from original PDF page 23](assets/page_23_figure_context.png)
+
+VAST URIs and any other free text fields that might contain potentially dangerous characters should be wrapped in a CDATA block as demonstrated in the following example:
 ```xml
 <Impression id="myserver">
 <![CDATA[
@@ -581,136 +533,84 @@ http://ad.server.com/impression/dot.gif
 ]]>
 </Impression>
 ```
-
-Ad Server All URIs or any other free text fields containing potentially dangerous characters
-Implementation Note contained in the VAST document should be wrapped in CDATA blocks.
+|||
+|---|---|
+| Ad Server Implementation Note | All URIs or any other free text fields containing potentially dangerous characters  contained in the VAST document should be wrapped in CDATA blocks. |
 
 ##### 2.2.5.4 Impression vs. "Start" Event
-Impression tracking URIs should be used to track when the first frame of the ad is displayed. However,
-an ad may be made up of multiple creative. If the advertiser wants to track when individual ad creative
-are started in addition to tracking the ad impression, the VAST response should include a "start" event
-under the &lt;TrackingEvents&gt; element for the creative to be tracked. See the tracking notes under
-each relevant ad format in sections 2.3.1 - 2.3.5 for details.
+Impression tracking URIs should be used to track when the first frame of the ad is displayed. However, an ad may be made up of multiple creative. If the advertiser wants to track when individual ad creative are started in addition to tracking the ad impression, the VAST response should include a "start" event under the &lt;TrackingEvents&gt; element for the creative to be tracked. See the tracking notes under each relevant ad format in sections 2.3.1 - 2.3.5 for details.
 
 ##### 2.2.5.5 Multiple Impressions
-The use of multiple impression URIs allows the ad server to share impression-tracking information with
-other ad serving systems, such as a vendor ad server employed by the advertiser. When multiple
-impressione elements are included in a VAST response, the video player is required to request all
+The use of multiple impression URIs allows the ad server to share impression-tracking information with other ad serving systems, such as a vendor ad server employed by the advertiser. When multiple impressione elements are included in a VAST response, the video player is required to request all impressions at the same time. Any significant delay between impression requests may result in count discrepancies between ad serving systems.
 
-
-![Figure/context from original PDF page 23](assets/vast_3_0/page_23_figure_context.png)
-
-impressions at the same time. Any significant delay between impression requests may result in count
-discrepancies between ad serving systems.
-
-If multiple &lt;Impression&gt; elements are provided, they must be requested at the same
-moment in time or as close in time as possible. In particular for a VAST response
-Video Player containing a &lt;Linear&gt; element, compliancy with the IAB Digital Video Measurement
-Implementation Note Guidelines requires that all of the impression URIs be requested when the first frame of
-the Linear creative is displayed to the user. If any of the requests are delayed significantly,
-discrepancies may result in the participating ad serving system counts.
+|||
+|---|---|
+| Video Player Implementation Note | If multiple &lt;Impression&gt; elements are provided, they must be requested at the same
+moment in time or as close in time as possible. In particular for a VAST response containing a &lt;Linear&gt; element, compliancy with the IAB Digital Video Measurement Guidelines requires that all of the impression URIs be requested when the first frame of the Linear creative is displayed to the user. If any of the requests are delayed significantly, discrepancies may result in the participating ad serving system counts.|
 
 ##### 2.2.5.6 Tracking Records for Multiple Parties
-Multiple parties involved in a digital advertising campaign may all want their own tracking records for a
-video ad served in a VAST format. There are different ways to do this, but VAST enables the use of
-multiple tracking elements-each of which can provide a URI to the server of any party requesting
-notification of tracking information on the ad.
+Multiple parties involved in a digital advertising campaign may all want their own tracking records for a video ad served in a VAST format. There are different ways to do this, but VAST enables the use of multiple tracking elements-each of which can provide a URI to the server of any party requesting notification of tracking information on the ad.
 
-Tracking elements for each of the three creative elements all include an id attribute. As with multiple
-Impressions described in the previous section, whenever multiple tracking elements of the same id are
-provided, the tracking resource for each should all be requested at the same time. Any significant delay
-in tracking resource requests can result in discrepancies in the participating parties' systems.
+Tracking elements for each of the three creative elements all include an id attribute. As with multiple Impressions described in the previous section, whenever multiple tracking elements of the same id are provided, the tracking resource for each should all be requested at the same time. Any significant delay in tracking resource requests can result in discrepancies in the participating parties' systems.
 
 #### 2.2.6 The &lt;Creatives&gt; Element
-A creative in VAST is a file that is part of a VAST ad. Multiple creative may be provided in the form of
-Linear, NonLinear, or Companions. Multiple creative of the same kind may also be provided in different
-technical formats so that the file most suited to the user's device can be displayed (only the creative
-best suited to the technology/device would be used in this case). Despite how many or what type of
-creative are included as part of the Ad, all creative files should generally represent the same creative
-concept.
+A creative in VAST is a file that is part of a VAST ad. Multiple creative may be provided in the form of Linear, NonLinear, or Companions. Multiple creative of the same kind may also be provided in different technical formats so that the file most suited to the user's device can be displayed (only the creative best suited to the technology/device would be used in this case). Despite how many or what type of creative are included as part of the Ad, all creative files should generally represent the same creative concept.
 
 Within the &lt;InLine&gt; element is one &lt;Creatives&gt; element. The &lt;Creatives&gt; element provides
-details about the files for each creative to be included as part of the ad experience. Multiple
-```xml
-<Creative> may be nested within the <Creatives> element. Note the plural spelling of the primary
-element <Creatives> and the singular spelling of the nested element <Creative>.
-```
+details about the files for each creative to be included as part of the ad experience. Multiple &lt;Creative&gt; may be nested within the &lt;Creatives&gt; element. Note the plural spelling of the primary element &lt;Creatives&gt; and the singular spelling of the nested element &lt;Creative&gt;.
 
-Each nested &lt;Creative&gt; element contains one of: &lt;Linear&gt;, &lt;NonLinear&gt; or &lt;CompanionAds&gt;.
-Section 1.2 describes the different Ad types.
+Each nested &lt;Creative&gt; element contains one of: &lt;Linear&gt;, &lt;NonLinear&gt; or &lt;CompanionAds&gt;. Section 1.2 describes the different Ad types.
 
-The following diagram represents a &lt;Creatives&gt; element that contains a Linear Ad with
-complimentary Companion ads.
+The following diagram represents a &lt;Creatives&gt; element that contains a Linear Ad with complimentary Companion ads.
 
-The &lt;Creative&gt; element may contain a sequence attribute that identifies the numerical order in
-which each creative should display. For example, an Ad may wish to play a Linear creative followed by a
-NonLinear creative. Values for the sequence attribute in this case would be 1 for the Linear creative
-and 2 for the NonLinear creative. Sequential display of creative in the absence of sequence values is at
-the video player's discretion.
+![Figure/context from original PDF page 25](assets/page_25_figure_context.png)
 
-The &lt;Creative&gt; sequence attribute should not be confused with the &lt;Ad&gt;
-sequence attribute. Creative sequence identifies the sequence of multiple creative
-General
-within a single Ad and does NOT define a Pod. Conversely, the &lt;Ad&gt; sequence
-Implementation Note
-identifies the sequence of multiple Ads and defines an Ad Pod. See section 2.3.5 for
-details about Ad Pods.
+The &lt;Creative&gt; element may contain a sequence attribute that identifies the numerical order in which each creative should display. For example, an Ad may wish to play a Linear creative followed by a NonLinear creative. Values for the sequence attribute in this case would be 1 for the Linear creative and 2 for the NonLinear creative. Sequential display of creative in the absence of sequence values is at the video player's discretion.
+
+|||
+|---|---|
+| General Implementation Note | The &lt;Creative&gt; sequence attribute should not be confused with the &lt;Ad&gt; sequence attribute. Creative sequence identifies the sequence of multiple creative within a single Ad and does NOT define a Pod. Conversely, the &lt;Ad&gt; sequence identifies the sequence of multiple Ads and defines an Ad Pod. See section 2.3.5 for details about Ad Pods. |
 
 ##### 2.2.6.1 Creative Attributes
 The following attributes are available for the &lt;Creative&gt; element:
 
-- id: an ad server-defined identifier for the creative
-- sequence: the numerical order in which each sequenced creative should display (not to be confused
-with the &lt;Ad&gt; sequence attribute used to define Ad Pods)
-- adId: identifies the ad with which the creative is served
-- apiFramework: the technology used for any included API
+- <b>id:</b> an ad server-defined identifier for the creative
+- <b>sequence:</b> the numerical order in which each sequenced creative should display (not to be confused with the &lt;Ad&gt; sequence attribute used to define Ad Pods)
+- <b>adId:</b> identifies the ad with which the creative is served
+- <b>apiFramework:</b> the technology used for any included API
 
 All creative attributes are optional.
 
-
-![Figure/context from original PDF page 25](assets/vast_3_0/page_25_figure_context.png)
-
 ##### 2.2.6.2 VAST Example: Linear with Companions
-The following example demonstrates the basic structure of a VAST response in XML format. This
-response represents a Linear Ad with Companions. Ellipsis (…) represent missing information and are
-used in examples throughout this document in order to highlight only the VAST sections being discussed.
+The following example demonstrates the basic structure of a VAST response in XML format. This response represents a Linear Ad with Companions. Ellipsis (…) represent missing information and are used in examples throughout this document in order to highlight only the VAST sections being discussed.
 ```xml
 <VAST version="3.0">
-<Ad>
-<InLine>
-<AdSystem>My Ad Server</AdSystem>
-<AdTitle>Car Company</AdTitle>
-<Impression>...</Impression>
-<Creatives>
-<Creative>
-<Linear>...</Linear>
-</Creative>
-<Creative>
-<CompanionAds>...</CompanionAds>
-</Creative>
-</Creatives>
-</InLine>
-</Ad>
+    <Ad>
+        <InLine>
+            <AdSystem>My Ad Server</AdSystem>
+            <AdTitle>Car Company</AdTitle>
+            <Impression>...</Impression>
+            <Creatives>
+                <Creative>
+                <Linear>...</Linear>
+                </Creative>
+                <Creative>
+                <CompanionAds>...</CompanionAds>
+                </Creative>
+            </Creatives>
+        </InLine>
+    </Ad>
 </VAST>
 ```
 
 ##### 2.2.6.3 Creative Extensions
-When an API framework is needed to execute creative, a &lt;CreativeExtensions&gt; element can be
-added under the &lt;Creative&gt;. This extension can be used to load an executable creative with or
-without using a media file.
+When an API framework is needed to execute creative, a &lt;CreativeExtensions&gt; element can be added under the &lt;Creative&gt;. This extension can be used to load an executable creative with or without using a media file.
 
-A &lt;CreativeExtension&gt; element is nested under the &lt;CreativeExtensions&gt; (plural) element so
-that any xml extensions are separated from VAST xml. Additionally, any xml used in this extension
-should identify an xml name space (xmlns) to avoid confusing any of the xml element names with those
-of VAST.
+A &lt;CreativeExtension&gt; element is nested under the &lt;CreativeExtensions&gt; (plural) element so that any xml extensions are separated from VAST xml. Additionally, any xml used in this extension should identify an xml name space (xmlns) to avoid confusing any of the xml element names with those of VAST.
 
-The nested &lt;CreativeExtension&gt; includes an attribute for type, which specifies the MIME type
-needed to execute the extension.
+The nested &lt;CreativeExtension&gt; includes an attribute for type, which specifies the MIME type needed to execute the extension.
 
-The creative attribute, apiFramework, identifies the API needed to execute the creative. If the
-apiFramework attribute is not specified, the video player may disregard creative. If the Ad cannot be
-fully executed without it, then the video player may disregard the Ad and use the &lt;Error&gt; element
-(under the &lt;Ad&gt; element to notify the ad server that the Ad could not be displayed.
+The creative attribute, apiFramework, identifies the API needed to execute the creative. If the apiFramework attribute is not specified, the video player may disregard creative. If the Ad cannot be fully executed without it, then the video player may disregard the Ad and use the &lt;Error&gt; element (under the &lt;Ad&gt; element to notify the ad server that the Ad could not be displayed.
 
 ### 2.3 VAST Requirements by Compliance Format
 In VAST 3.0, a video player may choose to support different video ad formats while maintaining VAST-compliant status. Video players may opt to support one or more of five VAST ad formats:
@@ -721,51 +621,88 @@ In VAST 3.0, a video player may choose to support different video ad formats whi
 - NonLinear Ads
 - Ad Pods*
 
-*Skippable Linear Ads and Ad Pods require support for Linear Ads. Companion Ads require support for
-either Linear Ads or NonLinear Ads.
+*Skippable Linear Ads and Ad Pods require support for Linear Ads. Companion Ads require support for either Linear Ads or NonLinear Ads.
 
-Providing optional compliance formats enable video players to be compliant with VAST guidelines while
-only supporting the formats that best suit their video publishing model. Allowing the option of
-complying with select ad formats helps to increase adoption across the industry, making it easier for
-video ad servers to increase reach across more publisher platforms.
+Providing optional compliance formats enable video players to be compliant with VAST guidelines while only supporting the formats that best suit their video publishing model. Allowing the option of complying with select ad formats helps to increase adoption across the industry, making it easier for video ad servers to increase reach across more publisher platforms.
 
-Identifying Ad Formats in a VAST Response
-The following table summarizes the properties for elements found in a VAST response that represents
-one of the five VAST ad formats. A check ✓ under one of the ad format columns indicates that the VAST
-element in that row should be found in the VAST response.
+<b>Identifying Ad Formats in a VAST Response</b>
+The following table summarizes the properties for elements found in a VAST response that represents one of the five VAST ad formats. A check ✓ under one of the ad format columns indicates that the VAST element in that row should be found in the VAST response.
 
-Engineers can use the following table to program video players that quickly identify the VAST Ad formats
-included in the VAST response.
+Engineers can use the following table to program video players that quickly identify the VAST Ad formats included in the VAST response.
 
-VAST Ad Formats
-VAST Ad Properties Linear Ads Companion Ads Skippable Ad NonLinear Ads Ad Pods
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">VAST Ad Properties</th>
+      <th colspan="5">VAST Ad Formats</th>
+    </tr>
+    <tr>
+      <th>Linear Ads</th>
+      <th>Companion Ads</th>
+      <th>Skippable Ad</th>
+      <th>NonLinear Ads</th>
+      <th>Ad Pods</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&lt;Ad&gt; &nbsp; (no sequence)</td>
+      <td>&#10003;</td>
+      <td>&#10003;</td>
+      <td>&#10003;</td>
+      <td>&#10003;</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>&lt;Ad sequence=&quot;n&quot;&gt;</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>&#10003;</td>
+    </tr>
+    <tr>
+      <td>&lt;Linear&gt; &nbsp; (no skipoffset)</td>
+      <td>&#10003;</td>
+      <td>&#10003;*</td>
+      <td></td>
+      <td></td>
+      <td>&#10003;</td>
+    </tr>
+    <tr>
+      <td>&lt;Linear skipoffset=&quot;HH:MM:SS&quot;&gt;</td>
+      <td></td>
+      <td></td>
+      <td>&#10003;</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>&lt;NonLinearAds&gt;</td>
+      <td></td>
+      <td>&#10003;*</td>
+      <td></td>
+      <td>&#10003;</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>&lt;CompanionAds&gt;</td>
+      <td></td>
+      <td>&#10003;</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
 
-```xml
-<Ad> (no sequence) ✓ ✓ ✓ ✓
-<Ad sequence="n"> ✓
-<Linear> (no skipoffset) ✓ ✓* ✓
-<Linear skipoffset=
-"HH:MM:SS"> ✓
-<NonLinearAds> ✓* ✓
-<CompanionAds> ✓
-*Companion creative must be served with either Linear or NonLinear creative and cannot be served alone. Also, the
-<CompanionAds> element can be served in a VAST response for any other ad format. As long as the attribute,
-required="none", is present the video player can choose to ignore any companion creative included.
-```
+*Companion creative must be served with either Linear or NonLinear creative and cannot be served alone. Also, the &lt;CompanionAds&gt; element can be served in a VAST response for any other ad format. As long as the attribute, required="none", is present the video player can choose to ignore any companion creative included.
 
-Signature element properties for other formats may be found but can be ignored if they represent an ad
-format not supported.
+Signature element properties for other formats may be found but can be ignored if they represent an ad format not supported.
 
-For example, if the video player supports only Linear Ads but the VAST response contains &lt;Ad&gt; elements
-with sequence attributes intended to play as an Ad Pod, as long as there's at least one &lt;Ad&gt; element
-with no sequence attribute, the video player can ignore the additional sequenced &lt;Ad&gt; elements. But if
-the only options for ad formats found in the VAST response are those of a format the video player
-doesn't support, then the video player can reject the ad and notify the ad server using the &lt;Error&gt;
-element for the &lt;Ad&gt;.
+For example, if the video player supports only Linear Ads but the VAST response contains &lt;Ad&gt; elements with sequence attributes intended to play as an Ad Pod, as long as there's at least one &lt;Ad&gt; element with no sequence attribute, the video player can ignore the additional sequenced &lt;Ad&gt; elements. But if the only options for ad formats found in the VAST response are those of a format the video player doesn't support, then the video player can reject the ad and notify the ad server using the &lt;Error&gt; element for the &lt;Ad&gt;.
 
-Likewise, if a video player supports multiple formats such as both Linear Ads and Companion Ads
-(supporting the popular "linear with companion" offering), the signature element properties for both
-formats should be respected.
+Likewise, if a video player supports multiple formats such as both Linear Ads and Companion Ads (supporting the popular "linear with companion" offering), the signature element properties for both formats should be respected.
 
 Details for each of these compliance categories follow in sections 2.3.1-2.3.5.
 
